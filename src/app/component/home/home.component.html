@@ -1,8 +1,7 @@
-<p>home works!</p>
 <div>
     <app-header>
     </app-header>
-</div>l̥
+</div>
 <div class="main-content">
     <div class="header-content">
         <div class="emp-detail-text">
@@ -23,21 +22,24 @@
                 <th>Start Date</th>
                 <th>Actions</th>
             </tr>
-            <tr>
+            <tr *ngFor = "let employee of employeeDetails ">
                 <td>
-                    <img class="profile" src="..\assets\assets\profile-images\Ellipse -2.png" alt="">
+                    <img class="profilePic" src={{employee.profilePic}} alt="">
                 </td>
-                <td>Narayan Mahadevan</td>
-                <td>Male</td>
+                <td>{{employee.name}}</td>
+                <td>{{employee.gender}}</td>
                 <td>
-                    <div class="dept-label">HR</div>
-                    <div class="dept-label">Finance</div>
+                    <div class="debt-label" *ngFor="let departments of employee.departments">
+                        {{departments}}
+                    </div>
                 </td>
-                <td>3000000</td>
-                <td>1 Nov 2020</td>
+                <td>{{employee.salary}}</td>
+                <td>{{employee.createdDate}}</td>
                 <td>
-                    <img id="1" onclick="remove(this)" src="..\assets\assets\icons\delete-black-18dp.svg" alt="delete">
-                    <img id="1" onclick="update(this)" src="..\assets\assets\icons\create-black-18dp.svg" alt="edit">
+                    <img id={{employee.id}} onclick="remove(this)" 
+                    src="..\assets\assets\icons\delete-black-18dp.svg" alt="delete">
+                    <img id={{employee.id}} onclick="update(this)" 
+                    src="..\assets\assets\icons\create-black-18dp.svg" alt="edit">
                 </td>
             </tr>
         </table>
