@@ -24,12 +24,12 @@
             </tr>
             <tr *ngFor = "let employee of employeeDetails ">
                 <td>
-                    <img class="profilePic" src={{employee.profilePic}} alt="">
+                    <img class="profilePic" src="" alt="">
                 </td>
                 <td>{{employee.name}}</td>
                 <td>{{employee.gender}}</td>
                 <td>
-                    <div class="debt-label" *ngFor="let departments of employee.departments">
+                    <div class="debt-label" *ngFor="let departments of employee.department">
                         {{departments}}
                     </div>
                 </td>
