@@ -18,6 +18,14 @@ export class HomeComponent implements OnInit {
       this.employeeDetails = response.data;
       this.employeeCount = this.employeeDetails.length;
       console.log(this.employeeDetails);
+      console.log(this.employeeCount);
+    });
+  }
+
+  remove(id: number) {
+    this.httpService.deleteEmployeeData(id).subscribe(data=> {
+      console.log(data);
+      this.ngOnInit();      
     });
   }
 }

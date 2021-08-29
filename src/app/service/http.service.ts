@@ -18,4 +18,8 @@ export class HttpService {
     return this.httpClient.post("http://localhost:8080/employeepayrollservice/create", body);
   }
 
+  deleteEmployeeData(id: any): Observable<any> {
+    return this.httpClient.delete("http://localhost:8080/employeepayrollservice/delete/"+id);
+  }
+
 }
