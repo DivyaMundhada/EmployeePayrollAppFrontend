@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
@@ -6,20 +6,28 @@ import { Observable } from "rxjs";
   providedIn: 'root'
 })
 export class HttpService {
+  private baseUrl: string = "http://localhost:8080/employeepayrollservice";
 
   constructor(private httpClient: HttpClient) {
 
   }
   getEmployeeData(): Observable<any> {
-    return this.httpClient.get("http://localhost:8080/employeepayrollservice/get");
+    return this.httpClient.get(this.baseUrl +"/get");
   }
 
   addEmployeeData(body: any): Observable<any> {
-    return this.httpClient.post("http://localhost:8080/employeepayrollservice/create", body);
+    return this.httpClient.post(this.baseUrl+"/create", body);
   }
 
-  deleteEmployeeData(id: any): Observable<any> {
-    return this.httpClient.delete("http://localhost:8080/employeepayrollservice/delete/"+id);
+  deleteEmployeeData(id:number): Observable<any> {
+    return this.httpClient.delete(this.baseUrl+"/delete/"+id); 
+    //{
+    //  headers: new HttpHeaders(),
+    //  params: new HttpParams().append('id', id)
+  //})
   }
 
+  updateEmployeeData(id:number,body: any): Observable<any> {
+    return this.httpClient.put(this.baseUrl+"/update/"+id,body);
+  }
 }

@@ -24,7 +24,7 @@
             </tr>
             <tr *ngFor = "let employee of employeeDetails ">
                 <td>
-                    <img class="profilePic" src="" alt="">
+                    <img class="profilePic" src={{employee.profilePic}} alt="">
                 </td>
                 <td>{{employee.name}}</td>
                 <td>{{employee.gender}}</td>
@@ -39,7 +39,7 @@
                 <td>
                     <img id={{employee.empId}} (click)="remove(employee.empId)" 
                     src="..\assets\assets\icons\delete-black-18dp.svg" alt="delete">
-                    <img id={{employee.empId}} onclick="update(this)" 
+                    <img id={{employee.empId}} (click)="update(employee)" 
                     src="..\assets\assets\icons\create-black-18dp.svg" alt="edit">
                 </td>
             </tr>
