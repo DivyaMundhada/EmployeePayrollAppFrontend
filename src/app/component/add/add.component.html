@@ -82,7 +82,7 @@
     <div class="row-content">
       <label class="label text" for="createdDate"> Start Date </label>
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="createdDate">
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Choose a date" formControlName="createdDate">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>

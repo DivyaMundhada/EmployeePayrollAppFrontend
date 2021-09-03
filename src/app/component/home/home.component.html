@@ -29,13 +29,13 @@
                 <td>{{employee.name}}</td>
                 <td>{{employee.gender}}</td>
                 <td>
-                    <div class="debt-label" *ngFor="let departments of employee.department">
+                    <div class="dept-label" *ngFor="let departments of employee.department">
                         {{departments}}
                     </div>
                     
                 </td>
-                <td>{{employee.salary}}</td>
-                <td>{{employee.createdDate}}</td>
+                <td>&#8377; {{employee.salary}}</td>
+                <td>{{employee.createdDate | date:"dd MMM yyyy"}}</td>
                 <td>
                     <img id={{employee.empId}} (click)="remove(employee.empId)" 
                     src="..\assets\assets\icons\delete-black-18dp.svg" alt="delete">

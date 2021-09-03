@@ -10,13 +10,15 @@ import { HomeComponent } from './component/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './material/angular-material/angular-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SalaryPipe } from './pipe/salary.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     AddComponent,
-    HomeComponent
+    HomeComponent,
+    SalaryPipe
   ],
   imports: [
     BrowserModule,

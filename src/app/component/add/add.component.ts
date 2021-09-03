@@ -1,6 +1,8 @@
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from 'src/app/model/employee';
 import { DataService } from 'src/app/service/data.service';
@@ -14,8 +16,9 @@ import { HttpService } from 'src/app/service/http.service';
 export class AddComponent implements OnInit {
 
   public employee: Employee = new Employee;
-  public employeeFormGroup: FormGroup = new FormGroup({
-  });
+  public employeeFormGroup: FormGroup = new FormGroup({});
+  minDate: Date;
+  maxDate: Date;
 
   departments: any = [
     {
@@ -45,17 +48,21 @@ export class AddComponent implements OnInit {
     private httpService: HttpService,
     private dataService: DataService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private snackBar: MatSnackBar) {
 
     this.employeeFormGroup = this.formBuilder.group({
-      name: new FormControl(''),
-      profilePic: new FormControl(''),
-      gender: new FormControl(''),
+      name: new FormControl('',[Validators.required, Validators.pattern("^[A-Z]{1}[a-zA-Z\s]{2,}$")]),
+      profilePic: new FormControl('',Validators.required),
+      gender: new FormControl('',Validators.required),
       department: this.formBuilder.array([], [Validators.required]),
-      salary: new FormControl(''),
-      createdDate: new FormControl(''),
-      note: new FormControl('')
+      salary: new FormControl('',Validators.required),
+      createdDate: new FormControl('',Validators.required),
+      note: new FormControl('',Validators.required)
     })
+    const currentYear = new Date().getFullYear();
+    this.minDate = new Date(currentYear - 0,0,1);
+    this.maxDate = new Date();
   }
 
   onCheckboxChange(event: MatCheckboxChange) {
@@ -112,12 +119,14 @@ export class AddComponent implements OnInit {
       this.httpService.updateEmployeeData(this.activatedRoute.snapshot.params['id'],this.employee).subscribe(response => {
         console.log(response);
         this.router.navigateByUrl('/home');
+        this.snackBar.open("Form Updated Successfully","Updated",{duration:3000});
       });
     }
     else {
       this.httpService.addEmployeeData(this.employee).subscribe(response => {
         console.log(response);
         this.router.navigateByUrl('/home');
+        this.snackBar.open("Form Submitted Successfully","Submitted",{duration:3000});
       });
     }
   }
